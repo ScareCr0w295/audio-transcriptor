@@ -1,0 +1,17 @@
+<div class="language-selector-container">
+  <div class="form-group">
+    <label for="languageSelect" class="form-label">Target Language</label>
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="material-icons">language</i>
+      </span>
+      <select 
+        id="languageSelect" 
+        class="form-select custom-select" 
+        [(ngModel)]="selectedLanguage" 
+        (change)="onLanguageChange()">
+        <option *ngFor="let lang of languages" [value]="lang.code">{{ lang.name }}</option>
+      </select>
+    </div>
+  </div>
+</div>

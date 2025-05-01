@@ -1,0 +1,90 @@
+@use '@angular/material' as mat;
+
+// Define custom palettes with vibrant colors
+$primary-palette: (
+  50: #e0f7fa,
+  100: #b2ebf2,
+  200: #80deea,
+  300: #4dd0e1,
+  400: #26c6da,
+  500: #00bcd4,
+  600: #00acc1,
+  700: #0097a7,
+  800: #00838f,
+  900: #006064,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$accent-palette: (
+  50: #f3e5f5,
+  100: #e1bee7,
+  200: #ce93d8,
+  300: #ba68c8,
+  400: #ab47bc,
+  500: #9c27b0,
+  600: #8e24aa,
+  700: #7b1fa2,
+  800: #6a1b9a,
+  900: #4a148c,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+// Create the theme
+$primary: mat.define-palette($primary-palette, 500);
+$accent: mat.define-palette($accent-palette, 500);
+
+$theme: mat.define-dark-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Apply the theme to Angular Material
+@include mat.all-component-themes($theme);
+
+// Custom CSS variables for our components
+:root {
+  --primary-color: #00bcd4;
+  --primary-light: #4dd0e1;
+  --primary-dark: #0097a7;
+  --accent-color: #9c27b0;
+  --accent-light: #ba68c8;
+  --accent-dark: #7b1fa2;
+  --background-dark: #121212;
+  --background-card: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  --transition-fast: 0.3s ease;
+  --transition-slow: 0.6s ease;
+  --border-radius: 12px;
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
+  --neon-primary: 0 0 10px rgba(0, 188, 212, 0.5), 0 0 20px rgba(0, 188, 212, 0.3);
+  --neon-accent: 0 0 10px rgba(156, 39, 176, 0.5), 0 0 20px rgba(156, 39, 176, 0.3);
+}

@@ -1,0 +1,214 @@
+@import 'theme';
+
+/* Global styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Glass card styles */
+.glass-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive container */
+.responsive-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding: 0 32px;
+  }
+}
+
+/* Custom button styles */
+.neon-button {
+  position: relative;
+  padding: 12px 24px;
+  background-color: transparent;
+  border: 2px solid #00bcd4;
+  border-radius: 9999px;
+  color: #00bcd4;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  overflow: hidden; /* Change from 'visible' to 'hidden' to contain effects */
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00bcd4;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.neon-button:hover:not([disabled]) {
+  color: #000000;
+  box-shadow: 0 0 10px rgba(0, 188, 212, 0.5), 0 0 20px rgba(0, 188, 212, 0.3);
+}
+
+.neon-button:hover:not([disabled])::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.neon-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #666666;
+  color: #666666;
+}
+
+.neon-button .button-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 10;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 576px) {
+  .neon-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .neon-button .button-content mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+  }
+}
+
+/* Utility classes */
+.text-gradient {
+  background: linear-gradient(to right, #00bcd4, #9c27b0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Pulse loader animation */
+.pulse-loader {
+  display: flex;
+  gap: 6px;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #00bcd4;
+  animation: pulse 1.5s infinite;
+}
+
+.pulse-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.pulse-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Override Material styles */
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+/* Fix for Material dropdown panels */
+.cdk-overlay-pane {
+  max-width: 100vw !important;
+}
+
+.mat-mdc-select-panel {
+  max-width: 100% !important;
+  min-width: 100% !important;
+}
+
+/* Ensure dropdowns are visible on mobile */
+@media (max-width: 576px) {
+  .cdk-overlay-pane {
+    min-width: 100% !important;
+  }
+  
+  /* Keep this commented out as it pushes dropdown to bottom of screen */
+  /* .mat-mdc-select-panel {
+    margin-top: 36px !important;
+  } */
+}

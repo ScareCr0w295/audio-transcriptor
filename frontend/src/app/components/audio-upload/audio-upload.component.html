@@ -1,0 +1,37 @@
+<div class="audio-upload-container">
+  <div class="upload-section">
+    <button class="neon-button" (click)="fileInput.click()">
+      <span class="button-content">
+        <mat-icon>upload_file</mat-icon>
+        <span>Upload Audio</span>
+      </span>
+    </button>
+    <input #fileInput type="file" accept="audio/*" style="display: none" (change)="onFileSelected($event)" />
+    <span *ngIf="selectedFile && !isRecording && !audioPreviewUrl" class="file-name">{{ selectedFile.name }}</span>
+  </div>
+
+  <div class="record-section">
+    <button *ngIf="!isRecording" class="neon-button" (click)="startRecording()">
+      <span class="button-content">
+        <mat-icon>mic</mat-icon>
+        <span>Record Audio</span>
+      </span>
+    </button>
+    <button *ngIf="isRecording" class="neon-button" (click)="stopRecording()">
+      <span class="button-content">
+        <mat-icon>stop</mat-icon>
+        <span>Stop Recording</span>
+      </span>
+    </button>
+    
+    <div *ngIf="isRecording" class="recording-indicator">
+      <span class="recording-text">Recording...</span>
+      <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    </div>
+  </div>
+
+  <div *ngIf="audioPreviewUrl" class="audio-preview">
+    <h4>Audio Preview</h4>
+    <audio [src]="audioPreviewUrl" controls></audio>
+  </div>
+</div>

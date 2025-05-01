@@ -1,0 +1,80 @@
+<div class="app-container">
+  <div class="background-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+  </div>
+  
+  <header class="app-header">
+    <div class="container">
+      <div class="logo">
+        <div class="logo-icon-container">
+          <mat-icon class="logo-icon">record_voice_over</mat-icon>
+        </div>
+        <h1 class="text-gradient">Transcriptor</h1>
+      </div>
+    </div>
+  </header>
+  
+  <main class="main-content container py-4">
+    <!-- Main content with responsive layout -->
+    <div class="app-layout" [@fadeInStagger]="true">
+      <!-- Input and Translation sections responsive grid -->
+      <div class="row g-4 mb-5">
+        <!-- Left side: Input section -->
+        <div class="col-12 col-lg-6">
+          <section class="input-section glass-card h-100" [@slideInLeft]>
+            <div class="card-content">
+              <h2 class="section-title text-gradient">Audio Input</h2>
+              <div class="upload-container">
+                <app-audio-upload (fileSelected)="onFileSelected($event)"></app-audio-upload>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right side: Translation options -->
+        <div class="col-12 col-lg-6">
+          <section class="translate-section glass-card h-100" [@slideInRight]>
+            <div class="card-content">
+              <h2 class="section-title text-gradient">Translation Options</h2>
+              <div class="language-container">
+                <app-language-selector (languageSelected)="onLanguageSelected($event)"></app-language-selector>
+              </div>
+              <div class="action-container mt-auto">
+                <button class="neon-button" [disabled]="!selectedFile || isLoading" (click)="startTranslation()">
+                  <span class="button-content">
+                    <mat-icon>translate</mat-icon>
+                    <span>Translate</span>
+                  </span>
+                </button>
+
+                <div *ngIf="isLoading" class="loading-animation">
+                  <div class="pulse-loader">
+                    <div class="pulse-dot"></div>
+                    <div class="pulse-dot"></div>
+                    <div class="pulse-dot"></div>
+                  </div>
+                  <span class="loading-text">Processing...</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      
+      <!-- Results section -->
+      <app-transcription-result 
+        *ngIf="showResults || originalText || translatedText || translatedAudioUrl"
+        [originalText]="originalText" 
+        [translatedText]="translatedText"
+        [audioUrl]="translatedAudioUrl" 
+        [isLoading]="isLoading"
+        [detectedLanguage]="detectedLanguage"
+        [targetLanguage]="targetLanguageName">
+      </app-transcription-result>
+    </div>
+  </main>
+</div>

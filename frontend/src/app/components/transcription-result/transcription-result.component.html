@@ -1,0 +1,75 @@
+<div class="result-container" [@fadeIn]>
+  <div class="row g-4" [@staggerItems]="originalText">
+    <!-- Original Transcription Card -->
+    <div class="col-12 col-md-6 col-lg-4" *ngIf="originalText">
+      <div class="result-card glass-card h-100">
+        <div class="card-header">
+          <div class="header-icon">
+            <mat-icon>record_voice_over</mat-icon>
+          </div>
+          <div class="header-content">
+            <h3>Original Transcription</h3>
+            <div class="language-badge">
+              <span>{{ detectedLanguage }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <p class="text-content">{{ originalText }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Translated Text Card -->
+    <div class="col-12 col-md-6 col-lg-4" *ngIf="translatedText">
+      <div class="result-card glass-card h-100">
+        <div class="card-header">
+          <div class="header-icon accent">
+            <mat-icon>translate</mat-icon>
+          </div>
+          <div class="header-content">
+            <h3>Translated Text</h3>
+            <div class="language-badge accent">
+              <span>{{ targetLanguage }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-content">
+          <p class="text-content">{{ translatedText }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Audio Preview Card -->
+    <div class="col-12 col-md-12 col-lg-4" *ngIf="audioUrl">
+      <div class="result-card glass-card h-100 audio-card" [@pulseAnimation]>
+        <div class="card-header">
+          <div class="header-icon accent-2">
+            <mat-icon>volume_up</mat-icon>
+          </div>
+          <div class="header-content">
+            <h3>Audio Preview</h3>
+            <div class="language-badge accent-2">
+              <span>{{ targetLanguage }}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card-content audio-content">
+          <div class="audio-player">
+            <audio controls [src]="sanitizedAudioUrl" (error)="handleAudioError($event)" class="w-100"></audio>
+            <div class="audio-waves">
+              <div class="wave"></div>
+              <div class="wave"></div>
+              <div class="wave"></div>
+              <div class="wave"></div>
+              <div class="wave"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
