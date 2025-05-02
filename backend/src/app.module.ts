@@ -6,6 +6,7 @@ import { TranscriptionModule } from './transcription/transcription.module';
 import { TranslationModule } from './translation/translation.module';
 import { SpeechModule } from './speech/speech.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { MulterModule } from '@nestjs/platform-express';
       envFilePath: process.env.NODE_ENV === 'production' ? [] : ['.env.development'],
     }),
     MulterModule.register({
-      dest: './uploads',
+      storage: memoryStorage(), // Use memory storage instead of disk storage
     }),
     TranscriptionModule,
     TranslationModule,
