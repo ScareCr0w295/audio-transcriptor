@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, catchError, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
-  private apiUrl = 'http://localhost:3000'; // Adjust this to your NestJS backend URL
+  private apiUrl = environment.apiUrl; // Use environment configuration
 
   constructor(private http: HttpClient) {}
 
