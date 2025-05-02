@@ -1,4 +1,4 @@
-// Environment configuration using .env files
+// Environment configuration using process.env directly
 interface EnvironmentConfig {
   port: number;
   isProduction: boolean;
@@ -12,7 +12,6 @@ const getCorsOrigins = () => {
   return origins.split(',').map(origin => origin.trim());
 };
 
-// Create environment configuration based on loaded .env variables
 export const environment: EnvironmentConfig = {
   port: Number(process.env.PORT) || 3000,
   isProduction: process.env.NODE_ENV === 'production',

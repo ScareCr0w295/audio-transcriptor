@@ -1,24 +1,11 @@
-import * as dotenv from 'dotenv';
-import * as fs from 'fs';
-import * as path from 'path';
-
-// Determine which environment file to load
+// Simplified environment loader for Vercel deployment
 export function loadEnvironment() {
+  // In Vercel, environment variables are already loaded
+  // This function now just logs the environment for debugging
   const environment = process.env.NODE_ENV || 'development';
-  const envFile = `.env.${environment}`;
-  const envPath = path.resolve(process.cwd(), envFile);
+  console.log(`Running in ${environment} environment`);
   
-  // Check if the environment file exists
-  if (fs.existsSync(envPath)) {
-    const envConfig = dotenv.parse(fs.readFileSync(envPath));
-    
-    // Set environment variables
-    for (const key in envConfig) {
-      process.env[key] = envConfig[key];
-    }
-    
-    console.log(`Loaded environment from ${envFile}`);
-  } else {
-    console.warn(`Environment file ${envFile} not found. Using default environment variables.`);
-  }
+  // Log some key environment variables to verify they're available
+  console.log(`API_URL: ${process.env.API_URL || 'not set'}`);
+  console.log(`CORS_ORIGINS: ${process.env.CORS_ORIGINS || 'not set'}`);
 }
