@@ -1,4 +1,4 @@
-// Environment configuration that doesn't depend on constants
+// Environment configuration using .env files
 interface EnvironmentConfig {
   port: number;
   isProduction: boolean;
@@ -12,19 +12,10 @@ const getCorsOrigins = () => {
   return origins.split(',').map(origin => origin.trim());
 };
 
-const developmentConfig: EnvironmentConfig = {
+// Create environment configuration based on loaded .env variables
+export const environment: EnvironmentConfig = {
   port: Number(process.env.PORT) || 3000,
-  isProduction: false,
-  apiUrl: 'http://localhost:3000',
-  corsOrigins: ['http://localhost:4200']
-};
-
-const productionConfig: EnvironmentConfig = {
-  port: Number(process.env.PORT) || 3000,
-  isProduction: true,
-  apiUrl: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://your-production-api-url.com',
+  isProduction: process.env.NODE_ENV === 'production',
+  apiUrl: process.env.API_URL || 'http://localhost:3000',
   corsOrigins: getCorsOrigins()
 };
-
-export const environment: EnvironmentConfig = 
-  (process.env.NODE_ENV === 'production') ? productionConfig : developmentConfig;
